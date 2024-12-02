@@ -1,56 +1,80 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Reflection;
 
-class Program
+namespace ReflectionExample
 {
-    // Метод для демонстрації роботи з Thread
-    static void ThreadMethod1()
+    // Клас, який містить 5 полів і 3 методи
+    public class ExampleClass
     {
-        Console.WriteLine($"Thread 1 started on Thread ID: {Thread.CurrentThread.ManagedThreadId}");
-        for (int i = 0; i < 5; i++)
+        public int Id;
+        private string name;
+        protected bool isActive;
+        internal DateTime createdDate;
+        protected internal double rating;
+
+        public ExampleClass(int id, string name, bool isActive, DateTime createdDate, double rating)
         {
-            Console.WriteLine($"Thread 1 is working... {i}");
-            Thread.Sleep(500); 
+            this.Id = id;
+            this.name = name;
+            this.isActive = isActive;
+            this.createdDate = createdDate;
+            this.rating = rating;
         }
-        Console.WriteLine("Thread 1 completed.");
-    }
 
-    // Інший метод для демонстрації роботи з Thread
-    static void ThreadMethod2()
-    {
-        Console.WriteLine($"Thread 2 started on Thread ID: {Thread.CurrentThread.ManagedThreadId}");
-        for (int i = 0; i < 3; i++)
+        public void PrintInfo()
         {
-            Console.WriteLine($"Thread 2 is working... {i}");
-            Thread.Sleep(700); 
+            Console.WriteLine($"ID: {Id}, Name: {name}, Active: {isActive}, Created Date: {createdDate}, Rating: {rating}");
         }
-        Console.WriteLine("Thread 2 completed.");
+
+        public int CalculateAge()
+        {
+            return DateTime.Now.Year - createdDate.Year;
+        }
+
+        private void SetRating(double newRating)
+        {
+            rating = newRating;
+            Console.WriteLine($"New Rating: {rating}");
+        }
     }
 
-    // Асинхронний метод для демонстрації Async-Await
-    static async Task AsyncMethod()
+    class Program
     {
-        Console.WriteLine($"Async method started on Thread ID: {Thread.CurrentThread.ManagedThreadId}");
-        await Task.Delay(1000); 
-        Console.WriteLine("Async method completed.");
-    }
+        static void Main(string[] args)
+        {
+            ExampleClass example = new ExampleClass(1, "My Name", true, new DateTime(2024, 1, 11), 4.5);
 
-    static void Main(string[] args)
-    {
-        Thread thread1 = new Thread(ThreadMethod1);
-        Thread thread2 = new Thread(ThreadMethod2);
+            // Використання Type та TypeInfo
+            Type type = typeof(ExampleClass);
+            Console.WriteLine("Type Name: " + type.Name);
+            Console.WriteLine("Namespace: " + type.Namespace);
+            
+            // Використання MemberInfo для виведення інформації про члени класу
+            MemberInfo[] members = type.GetMembers();
+            Console.WriteLine("\nMembers of ExampleClass:");
+            foreach (var member in members)
+            {
+                Console.WriteLine($"{member.MemberType}: {member.Name}");
+            }
 
-        thread1.Start(); 
-        thread2.Start(); 
+            // Використання FieldInfo для доступу до полів класу
+            Console.WriteLine("\nField Info:");
+            FieldInfo[] fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            foreach (var field in fields)
+            {
+                Console.WriteLine($"{field.Name} - {field.FieldType}");
+            }
 
-        Task asyncTask = AsyncMethod();
-        asyncTask.Wait(); 
+            // Використання MethodInfo для виклику методу через Reflection
+            Console.WriteLine("\nMethod Info:");
+            MethodInfo method = type.GetMethod("SetRating", BindingFlags.NonPublic | BindingFlags.Instance);
+            method.Invoke(example, new object[] { 5.0 });
 
-        thread1.Join();
-        thread2.Join();
+            // Виклик публічного методу через Reflection
+            Console.WriteLine("\nCalling public method through reflection:");
+            MethodInfo printMethod = type.GetMethod("PrintInfo");
+            printMethod.Invoke(example, null);
 
-        Console.WriteLine("Main method completed.");
+        }
     }
 }
-

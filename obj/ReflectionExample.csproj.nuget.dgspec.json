@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "H:\\Projects\\web-interfaces\\MultiAsyncProject.csproj": {}
+    "H:\\Projects\\web-interfaces\\ReflectionExample.csproj": {}
   },
   "projects": {
-    "H:\\Projects\\web-interfaces\\MultiAsyncProject.csproj": {
+    "H:\\Projects\\web-interfaces\\ReflectionExample.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Projects\\web-interfaces\\MultiAsyncProject.csproj",
-        "projectName": "MultiAsyncProject",
-        "projectPath": "H:\\Projects\\web-interfaces\\MultiAsyncProject.csproj",
+        "projectUniqueName": "H:\\Projects\\web-interfaces\\ReflectionExample.csproj",
+        "projectName": "ReflectionExample",
+        "projectPath": "H:\\Projects\\web-interfaces\\ReflectionExample.csproj",
         "packagesPath": "C:\\Users\\Діма\\.nuget\\packages\\",
         "outputPath": "H:\\Projects\\web-interfaces\\obj\\",
         "projectStyle": "PackageReference",
