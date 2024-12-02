@@ -4,7 +4,7 @@ using System.Reflection;
 namespace ReflectionExample
 {
     // Клас, який містить 5 полів і 3 методи
-    public class ExampleClass
+    public class Film
     {
         public int Id;
         private string name;
@@ -12,7 +12,7 @@ namespace ReflectionExample
         internal DateTime createdDate;
         protected internal double rating;
 
-        public ExampleClass(int id, string name, bool isActive, DateTime createdDate, double rating)
+        public Film(int id, string name, bool isActive, DateTime createdDate, double rating)
         {
             this.Id = id;
             this.name = name;
@@ -42,16 +42,16 @@ namespace ReflectionExample
     {
         static void Main(string[] args)
         {
-            ExampleClass example = new ExampleClass(1, "My Name", true, new DateTime(2024, 1, 11), 4.5);
+            Film example = new Film(1, "My Name", true, new DateTime(2024, 1, 11), 4.5);
 
             // Використання Type та TypeInfo
-            Type type = typeof(ExampleClass);
+            Type type = typeof(Film);
             Console.WriteLine("Type Name: " + type.Name);
             Console.WriteLine("Namespace: " + type.Namespace);
             
             // Використання MemberInfo для виведення інформації про члени класу
             MemberInfo[] members = type.GetMembers();
-            Console.WriteLine("\nMembers of ExampleClass:");
+            Console.WriteLine("\nMembers of Film:");
             foreach (var member in members)
             {
                 Console.WriteLine($"{member.MemberType}: {member.Name}");
