@@ -16,6 +16,32 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "middleware/middleware": [
+        "libs/middleware/src"
+      ],
+      "middleware/middleware/*": [
+        "libs/middleware/src/*"
+      ],
+      "@app/types": [
+        "libs/types/src"
+      ],
+      "@app/types/*": [
+        "libs/types/src/*"
+      ],
+      "@app/config": [
+        "libs/config/src"
+      ],
+      "@app/config/*": [
+        "libs/config/src/*"
+      ],
+      "@app/exception": [
+        "libs/exception/src"
+      ],
+      "@app/exception/*": [
+        "libs/exception/src/*"
+      ]
+    }
   }
 }
