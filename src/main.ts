@@ -20,19 +20,22 @@ async function bootstrap() {
     app.useGlobalFilters(new GlobalExceptionFilter());
     app.setGlobalPrefix(`${SERVICE_NAME}`);
 
-    const config = new DocumentBuilder()
-        .setTitle('Service API')
-        .setDescription('API description')
-        .setVersion('1.0.0')
-        .build();
+    if (process.env.NODE_ENV === 'development') {
+        const config = new DocumentBuilder()
+            .setTitle('Service API')
+            .setDescription('API description')
+            .setVersion('1.0.0')
+            .build();
 
-    const documentFactory = () => SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('swagger', app, documentFactory, {
-        useGlobalPrefix: true,
-    });
+        const documentFactory = () => SwaggerModule.createDocument(app, config);
+        SwaggerModule.setup('swagger', app, documentFactory, {
+            useGlobalPrefix: true,
+        });
+        logger.log(`Swagger is available at ${SERVICE_NAME ? `/${SERVICE_NAME}` : ``}/swagger`)
+    }
 
     await app.listen(SERVICE_PORT, () =>
-        logger.log(`${SERVICE_NAME} start at port ${SERVICE_PORT}`)
+        logger.log(`${SERVICE_NAME ? SERVICE_NAME : `Service` } start at port ${SERVICE_PORT}`)
     );
 }
 bootstrap();
