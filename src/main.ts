@@ -2,8 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { GlobalExceptionFilter } from '@app/exception';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -15,8 +16,20 @@ async function bootstrap() {
 
     const logger = new Logger('NestApplication');
 
+    app.useGlobalPipes(new ValidationPipe());
     app.useGlobalFilters(new GlobalExceptionFilter());
     app.setGlobalPrefix(`${SERVICE_NAME}`);
+
+    const config = new DocumentBuilder()
+        .setTitle('Service API')
+        .setDescription('API description')
+        .setVersion('1.0.0')
+        .build();
+
+    const documentFactory = () => SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('swagger', app, documentFactory, {
+        useGlobalPrefix: true,
+    });
 
     await app.listen(SERVICE_PORT, () =>
         logger.log(`${SERVICE_NAME} start at port ${SERVICE_PORT}`)

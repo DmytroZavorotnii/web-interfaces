@@ -41,6 +41,12 @@
       ],
       "@app/exception/*": [
         "libs/exception/src/*"
+      ],
+      "@app/providers": [
+        "libs/providers/src"
+      ],
+      "@app/providers/*": [
+        "libs/providers/src/*"
       ]
     }
   }

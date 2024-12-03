@@ -6,7 +6,7 @@ import { catchError, firstValueFrom, Observable } from 'rxjs';
 @Controller('api/v1/lr5')
 export class Lr5Controller {
     private readonly logger = new Logger(Lr5Controller.name);
-    
+
     constructor(private readonly httpService: HttpService) {}
 
     @Get()
@@ -16,8 +16,8 @@ export class Lr5Controller {
                 catchError((error: AxiosError) => {
                     this.logger.error(error.response.data);
                     throw 'An error happened!';
-                }),
-            ),
+                })
+            )
         );
         return data;
     }

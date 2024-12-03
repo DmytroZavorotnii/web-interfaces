@@ -16,6 +16,8 @@
         "@app/config/(.*)": "<rootDir>/../libs/config/src/$1",
         "@app/config": "<rootDir>/../libs/config/src",
         "@app/exception/(.*)": "<rootDir>/../libs/exception/src/$1",
-        "@app/exception": "<rootDir>/../libs/exception/src"
+        "@app/exception": "<rootDir>/../libs/exception/src",
+        "@app/providers/(.*)": "<rootDir>/../libs/providers/src/$1",
+        "@app/providers": "<rootDir>/../libs/providers/src"
     }
 }

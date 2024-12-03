@@ -21,7 +21,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
                 ? exception.getStatus()
                 : HttpStatus.INTERNAL_SERVER_ERROR;
 
-        const message = exception.message
+        const message = exception.message;
 
         new ResponseEntity(message, status).toRes(response);
     }
