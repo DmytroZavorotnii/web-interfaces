@@ -11,7 +11,6 @@ export class Lr5Controller {
 
     @Get()
     async findAll(): Promise<AxiosResponse<any>> {
-        throw new Error("My Error")
         const { data } = await firstValueFrom(
             this.httpService.get<any>('https://dummyjson.com/users').pipe(
                 catchError((error: AxiosError) => {
