@@ -1,12 +1,12 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@app/config';
-import { UsersModule } from './users/users.module';
-import { Lr5Module } from './lr5/lr5.module';
 import { LoggerMiddleware } from 'middleware/middleware';
+import { CompaniesModule } from './companies/companies.module';
+import { EmployeesModule } from './employees/employees.module';
 import { ProvidersModule } from '@app/providers';
 
 @Module({
-    imports: [ConfigModule, UsersModule, Lr5Module],
+    imports: [ConfigModule, CompaniesModule, EmployeesModule, ProvidersModule],
 })
 export class AppModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {

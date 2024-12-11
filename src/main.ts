@@ -31,11 +31,15 @@ async function bootstrap() {
         SwaggerModule.setup('swagger', app, documentFactory, {
             useGlobalPrefix: true,
         });
-        logger.log(`Swagger is available at ${SERVICE_NAME ? `/${SERVICE_NAME}` : ``}/swagger`)
+        logger.log(
+            `Swagger is available at ${SERVICE_NAME ? `/${SERVICE_NAME}` : ``}/swagger`
+        );
     }
 
     await app.listen(SERVICE_PORT, () =>
-        logger.log(`${SERVICE_NAME ? SERVICE_NAME : `Service` } start at port ${SERVICE_PORT}`)
-    );
+        logger.log(
+            `${SERVICE_NAME ? SERVICE_NAME : `Service`} start at port ${SERVICE_PORT}`
+        )
+    ); 
 }
 bootstrap();
